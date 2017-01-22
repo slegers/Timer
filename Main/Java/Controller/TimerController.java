@@ -1,9 +1,7 @@
 package Controller;
 
-import Controller.Listners.CountDownListner;
-import Controller.Listners.ResetButtonListner;
-import Controller.Listners.StartButtonListner;
-import Controller.Listners.StopwatchListner;
+import Controller.Listners.*;
+import Model.Timer.CountDownTimer;
 import Model.Timer.GameTimer;
 import Model.Timer.Stopwatch;
 import View.CountDownView;
@@ -54,5 +52,19 @@ public class TimerController {
 
     public void resetTimer() {
         timer.reset();
+    }
+
+    public void setCountDownView(CountDownView countDownView) {
+        this.countDownView = countDownView;
+        timer = new CountDownTimer(100);
+        timer.addObserver(countDownView);
+        CountDownViewListnersAdded();
+        this.countDownView = countDownView;
+    }
+
+    private void CountDownViewListnersAdded() {
+        countDownView.addStartListner(new StartButtonListner(this));
+        countDownView.addResetListner(new ResetButtonListner(this));
+        countDownView.addStopListner(new StopwatchListner(this));
     }
 }

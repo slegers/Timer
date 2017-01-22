@@ -1,6 +1,7 @@
 package Controller.Listners;
 
 import Controller.TimerController;
+import View.CountDownView;
 import View.StopwatchView;
 
 import java.awt.event.ActionEvent;
@@ -20,6 +21,6 @@ public class CountDownListner implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         controller.disposeMainView();
-        controller.setStopwatchView(new StopwatchView(controller));
+        controller.setCountDownView(new CountDownView(controller));
     }
 }

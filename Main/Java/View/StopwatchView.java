@@ -2,10 +2,13 @@ package View;
 import Controller.TimerController;
 import Model.Observer.Observer;
 import Model.Observer.Subject;
+import Model.Round;
+import sun.print.BackgroundServiceLookup;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by yanice on 22/01/17.
@@ -30,7 +33,9 @@ public class StopwatchView extends JFrame implements Observer{
         time.setForeground(Color.red);
         add(start);
         add(reset);
-        add(round);
+
+        //TODO
+        //add(round);
     }
     public void addStartListner(ActionListener listener){
         start.addActionListener(listener);
