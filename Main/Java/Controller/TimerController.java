@@ -77,4 +77,7 @@ public class TimerController {
         timer.addObserver(countDownView);
         countDownView.update();
     }
+
+    public void dispose() {
+    }
 }

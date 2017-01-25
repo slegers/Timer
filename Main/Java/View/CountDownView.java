@@ -17,6 +17,7 @@ public class CountDownView extends JFrame implements Observer{
     private JLabel h,m,s;
     private JLabel time;
     private JButton start,reset,stop;
+    //private JMenuBar menubar;
 
     public CountDownView(TimerController controller){
         this.controller = controller;
@@ -36,7 +37,7 @@ public class CountDownView extends JFrame implements Observer{
         h = new JLabel("Hours:");
         m = new JLabel("Minutes:");
         s = new JLabel("Seconds:");
-
+      //  menubar = new MainMenu(controller);
         String[] s = new String[60];
         for(int i = 0; i < 60;i++){
             s[i] = i + "";
@@ -47,7 +48,8 @@ public class CountDownView extends JFrame implements Observer{
     }
 
     private void setElements() {
-        this.setLayout(new GridLayout(3,1));
+       //t add(menubar);
+        this.setLayout(new GridLayout(4,3));
         maxTimePanel.setLayout(new GridLayout(2,3));
         maxTimePanel.add(h);
         maxTimePanel.add(m);
@@ -81,7 +83,6 @@ public class CountDownView extends JFrame implements Observer{
 
     @Override
     public void update() {
-        System.out.println("jas");
         time.setText(controller.getTime());
     }
 
