@@ -23,6 +23,7 @@ public class StopwatchView extends JFrame implements Observer{
         createElements();
         addElements();
         pack();
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void addElements() {

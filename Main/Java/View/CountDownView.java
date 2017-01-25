@@ -12,10 +12,10 @@ import java.awt.event.ActionListener;
  */
 public class CountDownView extends JFrame implements Observer{
     private JPanel buttonsPanel,maxTimePanel;
+    private JComboBox hours,min,sec;
     private TimerController controller;
+    private JLabel h,m,s;
     private JLabel time;
-    private JLabel maxTime;
-    private JTextField maxTimeTxt;
     private JButton start,reset,stop;
 
     public CountDownView(TimerController controller){
@@ -24,25 +24,41 @@ public class CountDownView extends JFrame implements Observer{
         setElements();
         pack();
         setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     private void createElements() {
         buttonsPanel = new JPanel();
         maxTimePanel = new JPanel();
-        time = new JLabel("Time");
-        maxTime = new JLabel("Maximum time:");
-        maxTimeTxt = new JTextField(5);
+        time = new JLabel("00:00:00:00");
         start = new JButton("Start");
         reset = new JButton("Reset");
         stop = new JButton("Stop");
+        h = new JLabel("Hours:");
+        m = new JLabel("Minutes:");
+        s = new JLabel("Seconds:");
+
+        String[] s = new String[60];
+        for(int i = 0; i < 60;i++){
+            s[i] = i + "";
+        }
+        hours = new JComboBox(s);
+        min = new JComboBox(s);
+        sec = new JComboBox(s);
     }
 
     private void setElements() {
-        this.setLayout(new GridLayout(2,1));
-        maxTimePanel.setLayout(new GridLayout(1,2));
-        maxTimePanel.add(maxTime);
-        maxTimeTxt.setText("00:00:20:00");
-        maxTimePanel.add(maxTimeTxt);
+        this.setLayout(new GridLayout(3,1));
+        maxTimePanel.setLayout(new GridLayout(2,3));
+        maxTimePanel.add(h);
+        maxTimePanel.add(m);
+        maxTimePanel.add(s);
+        maxTimePanel.add(hours);
+        maxTimePanel.add(min);
+        maxTimePanel.add(sec);
+
         add(maxTimePanel);
+        time.setHorizontalAlignment(SwingConstants.CENTER);
+        add(time);
         buttonsPanel.setLayout(new GridLayout(3,1));
         buttonsPanel.add(start);
         buttonsPanel.add(reset);
@@ -57,13 +73,27 @@ public class CountDownView extends JFrame implements Observer{
     }
     public void addResetListner(ActionListener listener){
         reset.addActionListener(listener);
+        controller.resetCountDownTimer();
     }
     public String getMaxTime(){
-        return maxTime.getText();
+        return time.getText();
     }
 
     @Override
     public void update() {
+        System.out.println("jas");
+        time.setText(controller.getTime());
+    }
 
+    public int getHours() {
+        return Integer.parseInt(hours.getSelectedItem().toString());
+    }
+
+    public int getMinutes() {
+        return Integer.parseInt(min.getSelectedItem().toString());
+    }
+
+    public int getseconds() {
+        return Integer.parseInt(sec.getSelectedItem().toString());
     }
 }

@@ -56,7 +56,7 @@ public class TimerController {
 
     public void setCountDownView(CountDownView countDownView) {
         this.countDownView = countDownView;
-        timer = new CountDownTimer(100);
+        timer = new CountDownTimer(countDownView.getHours(),countDownView.getMinutes(),countDownView.getseconds(),this);
         timer.addObserver(countDownView);
         CountDownViewListnersAdded();
         this.countDownView = countDownView;
@@ -65,6 +65,16 @@ public class TimerController {
     private void CountDownViewListnersAdded() {
         countDownView.addStartListner(new StartButtonListner(this));
         countDownView.addResetListner(new ResetButtonListner(this));
-        countDownView.addStopListner(new StopwatchListner(this));
+        countDownView.addStopListner(new StopbuttonListner(this));
+    }
+
+    public void stopTimer() {
+        timer.stop();
+    }
+
+    public void resetCountDownTimer() {
+        timer = new CountDownTimer(countDownView.getHours(),countDownView.getMinutes(),countDownView.getseconds(),this);
+        timer.addObserver(countDownView);
+        countDownView.update();
     }
 }
